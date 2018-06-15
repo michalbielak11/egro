@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorator="main">
+<body>
+<section layout:fragment="content">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-area-chart"></i> Lista Produktów <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/item/add}">Dodaj nowy produkt</a>
+                          Sortuj według:
+            <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                <option value="">Wybierz...</option>
+                <option th:value="@{/item/asc}">Cena rosnoąco</option>
+                <option th:value="@{/item/desc}">Cena malejąco</option>
+                <option th:value="@{/item/name-asc}">Nazwa rosnaco</option>
+                <option th:value="@{/item/name-desc}">Nazwa malejąco</option>
+            </select>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Opis</th>
+                        <th>Numer Seryjny</th>
+                        <th>Cena</th>
+
+                        <th sec:authorize="hasRole('ROLE_ADMIN')">Usuń produkt</th>
+                        <th sec:authorize="hasRole('ROLE_ADMIN')">Edytuj produkt</th>
+
+                        <th>Dodaj do zamówienia</th>
+                    </tr>
+                    <tr th:each="item: ${items}">
+                        <td th:text="${item.name}"/>
+                        <td th:text="${item.description}"/>
+                        <td th:text="${item.serialNumber}"/>
+                        <td th:text="${item.price}"/>
+
+                        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/item/delete/{id}/(id=${item.id})}">DELETE</a></td>
+                        <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/item/update/{id}/(id=${item.id})}">EDIT</a></td>
+
+                        <td sec:authorize="isAuthenticated()"><a th:href="@{/order/add/{id}(id=${item.id})}">dodaj</a></td>
+
+                        <td sec:authorize="!isAuthenticated()"><a th:href="@{/login}"> Zaloguj </a>się aby dodać do koszyka</td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

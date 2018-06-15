@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>NIE MASZ DOSTĘPU</h1>
+<p	sec:authorize="isAuthenticated()">
+<p>Zalogowany	jako:	<span	sec:authentication="name"></span></p>
+<p>Posiada	role:	<span	sec:authentication="authorities"></span></p>
+<a href="/">HOME</a>
+</body>
+</html>

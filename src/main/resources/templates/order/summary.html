@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="main">
+<body>
+<section layout:fragment="content">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-area-chart"></i> Koszyk
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <th>Nazwa</th>
+                    <th>Ilosc</th>
+                    <th>Cena</th>
+                    <th>Akacja</th>
+                    <tr th:each="order: ${orderItems}">
+                        <td th:text="${order.name}"/>
+                        <td th:text="${order.quantity}"/>
+                        <td th:text="${order.price} * ${order.quantity}"/>
+                        <td><a th:href="@{/order/remove/{id}/(id=${order.id})}">Usuń</a><a th:href="@{/order/plus/{id}/(id=${order.id})}" class="btn btn-info">+</a>
+                            <a th:href="@{/order/minus/{id}/(id=${order.id})}" class="btn btn-info">-</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

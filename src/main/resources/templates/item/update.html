@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="main">
+<body>
+<section layout:fragment="content">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-area-chart"></i> Register
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <form th:action="@{/item/add}" method="post">
+                    <input type="hidden" th:field="${item.id}" />
+                    <input type="name"  th:placeholder="Nazwa"
+                           id="name" name="name" class="form-control" /> <br />
+                    <textarea type="description" placeholder="Opis"
+                              id="description" name="description" class="form-control" ></textarea> <br />
+                    <input type="serialNumber"  th:placeholder="Number"
+                           id="serialNumber" name="serialNumber" class="form-control" /> <br />
+                    <input type="price"  th:placeholder="Cena"
+                           id="price" name="price" class="form-control" /> <br />
+                    <div><input type="submit" value="Dodaj" class="btn btn-info"/></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
